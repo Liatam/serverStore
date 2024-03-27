@@ -35,7 +35,7 @@ namespace server.Controllers
         [Authorize]
         [HttpPut]
         [Route("{id:Guid}")]
-        public async Task<IActionResult> UpdateUser([FromRoute] Guid id, User updateUserRequest)
+        public async Task<IActionResult> UpdateUser([FromRoute] Guid id, UserUpdateDto updateUserRequest)
         {
             var user = await _serverDbContext.Users.FindAsync(id);
 
@@ -43,12 +43,19 @@ namespace server.Controllers
                 return NotFound();
             // Update user information
             user.Username = updateUserRequest.Username;
-            user.Password = updateUserRequest.Password;
+            user.Email = updateUserRequest.Email;
             // Add more properties as needed
 
             _serverDbContext.SaveChanges();
 
             return Ok(user);
+        }
+
+        public class UserUpdateDto
+        {
+            public string Username { get; set; }
+            public string Email { get; set; }
+            // Add other fields that can be updated
         }
     }
 }

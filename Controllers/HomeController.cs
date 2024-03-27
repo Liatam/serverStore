@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,17 +27,14 @@ namespace JwtInDotnetCore.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] User loginRequest)
+        public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
-            System.Diagnostics.Debug.WriteLine("first");
             var user =await _context.Users.FirstOrDefaultAsync(u => u.Username == loginRequest.Username);
 
             if (user == null || !VerifyPassword(user.Password, loginRequest.Password))
             {
                 return Unauthorized("Invalid username or password.");
             }
-            Console.WriteLine("user");
-            Console.WriteLine(user);
             
             var token = GenerateJwtToken(user);
             return Ok(new { token= token, userId=user.Id });
@@ -45,6 +43,8 @@ namespace JwtInDotnetCore.Controllers
         [HttpPost("Signup")]
         public async Task <IActionResult> Signup([FromBody] User signupRequest)
         {
+            Console.WriteLine("*******");
+            Console.WriteLine(signupRequest);
             if (await _context.Users.AnyAsync(u => u.Username == signupRequest.Username))
             {
                 return Conflict("Username already exists.");
@@ -53,7 +53,9 @@ namespace JwtInDotnetCore.Controllers
             var user = new User
             {
                 Username = signupRequest.Username,
-                Password = HashPassword(signupRequest.Password)
+                Password = HashPassword(signupRequest.Password),
+                Email= signupRequest.Email,
+                Role= signupRequest.Role
                 // Add any additional fields you want to save during signup
             };
 
@@ -86,6 +88,12 @@ namespace JwtInDotnetCore.Controllers
         private string HashPassword(string password)
         {
             return BCrypt.Net.BCrypt.HashPassword(password);
+        }
+
+        public class LoginRequest
+        {
+            public string Username { get; set; }
+            public string Password { get; set; }
         }
 
     }
