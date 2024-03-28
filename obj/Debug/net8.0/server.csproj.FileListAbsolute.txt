@@ -145,3 +145,9 @@ C:\Users\User\Documents\storeProject\server\server\bin\Debug\net8.0\Microsoft.As
 C:\Users\User\Documents\storeProject\server\server\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Common.dll
 C:\Users\User\Documents\storeProject\server\server\bin\Debug\net8.0\Microsoft.Extensions.Features.dll
 C:\Users\User\Documents\storeProject\server\server\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\User\Documents\storeProject\server\server\bin\Debug\net8.0\System.Web.Razor.dll
+C:\Users\User\Documents\storeProject\server\server\bin\Debug\net8.0\System.Web.Helpers.dll
+C:\Users\User\Documents\storeProject\server\server\bin\Debug\net8.0\System.Web.WebPages.Deployment.dll
+C:\Users\User\Documents\storeProject\server\server\bin\Debug\net8.0\System.Web.WebPages.Razor.dll
+C:\Users\User\Documents\storeProject\server\server\bin\Debug\net8.0\System.Web.WebPages.dll
+C:\Users\User\Documents\storeProject\server\server\bin\Debug\net8.0\Microsoft.Web.Infrastructure.dll

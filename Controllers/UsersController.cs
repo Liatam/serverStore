@@ -41,10 +41,9 @@ namespace server.Controllers
 
             if (user == null)
                 return NotFound();
-            // Update user information
+
             user.Username = updateUserRequest.Username;
             user.Email = updateUserRequest.Email;
-            // Add more properties as needed
 
             _serverDbContext.SaveChanges();
 
@@ -55,7 +54,6 @@ namespace server.Controllers
         {
             public string Username { get; set; }
             public string Email { get; set; }
-            // Add other fields that can be updated
         }
     }
 }

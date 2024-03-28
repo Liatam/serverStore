@@ -8,7 +8,6 @@ using server.Hubs;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
-//Jwt configuration starts here
 var jwtIssuer = builder.Configuration.GetSection("Jwt:Issuer").Get<string>();
 var jwtKey = builder.Configuration.GetSection("Jwt:Key").Get<string>();
 
@@ -50,13 +49,14 @@ app.UseHttpsRedirection();
 app.UseCors(policy=>policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 app.UseAuthentication();
 
+
 app.UseAuthorization();
 
-////app.UseEndpoints(endpoints =>
-////{
-////    endpoints.MapHub<RealTimeHub>("/realtimehub");
-////    endpoints.MapControllers();
-////});
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHub<NotificationHub>("connectedUsersCount");
+    //endpoints.MapControllers();
+});
 app.MapControllers();
 
 app.Run();
